@@ -18,7 +18,7 @@ public class DataManager {
         helper = DBHelper.getInstance(context);
     }
 
-    public void insertAppTable(App app) {
+    public void insertAppTable(AppData app) {
         SQLiteDatabase db = helper.getWritableDatabase();
         values = new ContentValues();
         values.put(DBContract.AppTable.TIMESTAMP, app.getDuration());
