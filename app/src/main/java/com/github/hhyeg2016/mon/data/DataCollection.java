@@ -1,4 +1,4 @@
-package com.github.hhyeg2016.mon;
+package com.github.hhyeg2016.mon.data;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class DataCollection {
         dataCollection.add(app);
     }
 
-    public void addLocaiton(Integer logTime, Float x, Float y) {
+    public void addLocation(Integer logTime, Float x, Float y) {
         Location location = new Location(logTime, x, y);
         dataCollection.add(location);
     }

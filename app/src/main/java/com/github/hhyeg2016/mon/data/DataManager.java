@@ -1,4 +1,4 @@
-package com.github.hhyeg2016.mon;
+package com.github.hhyeg2016.mon.data;
 
 import android.content.Context;
 

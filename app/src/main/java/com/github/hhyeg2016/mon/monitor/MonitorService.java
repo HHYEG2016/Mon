@@ -1,4 +1,4 @@
-package com.github.hhyeg2016.mon.com.github.hhyeg2016.mon.monitor;
+package com.github.hhyeg2016.mon.monitor;
 
 import android.app.Service;
 import android.content.Intent;
@@ -34,28 +34,6 @@ public class MonitorService extends Service {
         return mBinder;
     }
 
-    // Handler that receives messages from the thread
-    private final class ServiceHandler extends Handler {
-        public ServiceHandler(Looper looper) {
-            super(looper);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            // Normally we would do some work here, like download a file.
-            // For our sample, we just sleep for 5 seconds.
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                // Restore interrupt status.
-                Thread.currentThread().interrupt();
-            }
-            // Stop the service using the startId, so that we don't stop
-            // the service in the middle of handling another job
-            stopSelf(msg.arg1);
-        }
-    }
-
     @Override
     public void onCreate() {
         // Start up the thread running the service.  Note that we create a
@@ -88,5 +66,27 @@ public class MonitorService extends Service {
     @Override
     public void onDestroy() {
         Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
+    }
+
+    // Handler that receives messages from the thread
+    private final class ServiceHandler extends Handler {
+        public ServiceHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            // Normally we would do some work here, like download a file.
+            // For our sample, we just sleep for 5 seconds.
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                // Restore interrupt status.
+                Thread.currentThread().interrupt();
+            }
+            // Stop the service using the startId, so that we don't stop
+            // the service in the middle of handling another job
+            stopSelf(msg.arg1);
+        }
     }
 }
