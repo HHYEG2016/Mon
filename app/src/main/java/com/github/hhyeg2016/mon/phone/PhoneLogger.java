@@ -21,9 +21,6 @@ public class PhoneLogger {
 
         Log.i(PHONE, "RUNNING");
         try {
-            Cursor c = context.getContentResolver().query(
-                    CallLog.Calls.CONTENT_URI, null, null, null, null
-            );
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG) !=
                     PackageManager.PERMISSION_GRANTED) {
                 // NO PERMISSIONS
@@ -31,6 +28,9 @@ public class PhoneLogger {
                 Log.i(PHONE, "Read call log not set");
                 return new String[0];
             }
+            Cursor c = context.getContentResolver().query(
+                    CallLog.Calls.CONTENT_URI, null, null, null, null
+            );
             /*
             // Column name types
              [contactid, logtype, sim_id, sec_record, real_phone_number, presentation,
