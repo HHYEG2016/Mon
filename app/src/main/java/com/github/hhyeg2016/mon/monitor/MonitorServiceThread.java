@@ -8,6 +8,8 @@ import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import com.github.hhyeg2016.mon.phone.PhoneLogger;
+
 public class MonitorServiceThread extends Thread {
     public static String SERVICE_THREAD_HASH = "SERVICE_THREAD_HASH";
     public static String SERVICE_THREAD_PING_COUNT = "SERVICE_THREAD_PING_COUNT";
@@ -29,6 +31,9 @@ public class MonitorServiceThread extends Thread {
             Log.i(SERVICE_THREAD_HASH, "id: " + this.hashCode());
             Log.i(SERVICE_THREAD_PING_COUNT, "pc: " + pingCount);
             logUStats();
+
+            PhoneLogger.getPhoneLogs(MonitorServiceThread.context);
+
             pingCount++;
             try {
                 Thread.sleep(REFRESH_RATE);
@@ -48,8 +53,7 @@ public class MonitorServiceThread extends Thread {
         SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-yyyy HH:mm:ss");
         String TAG = "logUStats";
 
-        //noinspection ResourceType
-        UsageStatsManager usm = (UsageStatsManager) context.getSystemService("usagestats");
+        UsageStatsManager usm = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
 
         Calendar calendar = Calendar.getInstance();
         long endTime = calendar.getTimeInMillis();
