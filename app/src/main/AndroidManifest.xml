@@ -23,7 +23,7 @@
         </activity>
 
         <service
-            android:name=".com.github.hhyeg2016.mon.monitor.MonitorService"
+            android:name=".monitor.MonitorService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.READ_OWNER_DATA" />

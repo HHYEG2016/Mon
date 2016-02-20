@@ -16,7 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.github.hhyeg2016.mon.com.github.hhyeg2016.mon.monitor.MonitorService;
+import com.github.hhyeg2016.mon.monitor.MonitorService;
 
 public class MainActivity extends AppCompatActivity {
 

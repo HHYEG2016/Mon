@@ -1,4 +1,4 @@
-package com.github.hhyeg2016.mon.com.github.hhyeg2016.mon.monitor;
+package com.github.hhyeg2016.mon.monitor;
 
 import android.app.Service;
 import android.content.Intent;
