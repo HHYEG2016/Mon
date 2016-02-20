@@ -43,9 +43,9 @@ public class AppDataManager  extends StoringManager<AppData>{
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             AppData appData = new AppData(
-                    cursor.getInt(1), // title
-                    cursor.getInt(2), // author
-                    cursor.getString(3) // description
+                    cursor.getLong(1), // Log Time
+                    cursor.getString(2), // App Name
+                    cursor.getString(3) // Event Type
             );
             results.add(appData);
             cursor.moveToNext();
@@ -66,9 +66,9 @@ public class AppDataManager  extends StoringManager<AppData>{
 
     private void setContentValues(AppData appData) {
         values = new ContentValues();
-        values.put(DBContract.AppTable.TIMESTAMP, appData.getLogTime());
-        values.put(DBContract.AppTable.CONTENT, appData.getContent());
-        values.put(DBContract.AppTable.DURATION, appData.getDuration());
+        values.put(DBContract.AppTable.LOG_TIME, appData.getLogTime());
+        values.put(DBContract.AppTable.APP_NAME, appData.getAppName());
+        values.put(DBContract.AppTable.EVENT_TYPE, appData.getEventType());
     }
 
 }

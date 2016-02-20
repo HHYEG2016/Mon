@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
     private static DBHelper dbObject = null;
 
-    // www.androiddesignpatterns.com/2012/05/correctly-managing-your-sqlite-database.html </br>
-
     public static DBHelper getInstance(Context context) {
         if (dbObject == null) {
             dbObject = new DBHelper(context);

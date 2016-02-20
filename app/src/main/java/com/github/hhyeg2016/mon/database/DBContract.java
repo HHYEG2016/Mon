@@ -19,16 +19,16 @@ public final class DBContract {
         }
 
         public static final String TABLE_NAME = "AppTable";
-        public static final String TIMESTAMP = "TimeStamp";
-        public static final String CONTENT = "Content";
-        public static final String DURATION = "Duration";
+        public static final String LOG_TIME = "LogTime";
+        public static final String APP_NAME = "AppName";
+        public static final String EVENT_TYPE = "EventType";
 
         public static final String SQL_CREATE_TABLE = "CREATE TABLE "
                 + AppTable.TABLE_NAME + " ("
                 + AppTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + AppTable.TIMESTAMP + " INTEGER, "
-                + AppTable.DURATION + " INTEGER, "
-                + AppTable.CONTENT + " TEXT"
+                + AppTable.LOG_TIME + " LONG, "
+                + AppTable.APP_NAME + " TEXT, "
+                + AppTable.EVENT_TYPE + " TEXT"
                 + ")";
 
         public static final String SQL_DELETE_TABLE = "DROP TABLE IF EXISTS "
