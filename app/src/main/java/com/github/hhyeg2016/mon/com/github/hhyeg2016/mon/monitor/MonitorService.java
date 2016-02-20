@@ -3,18 +3,20 @@ package com.github.hhyeg2016.mon.com.github.hhyeg2016.mon.monitor;
 import android.app.Service;
 import android.content.Intent;
 import android.os.*;
-import android.util.Log;
 import android.widget.Toast;
 
 public class MonitorService extends Service {
-    public MonitorService() {
-        Log.i("SERVICE_HASH", "id: " + this.hashCode());
-    }
-
+    private static boolean serviceRunning = false;
     private ServiceHandler mServiceHandler;
-
-    // Binder given to clients
     private final IBinder mBinder = new LocalBinder();
+
+    public MonitorService() {
+        if (!serviceRunning) {
+            MonitorServiceThread mThread = new MonitorServiceThread();
+            mThread.start();
+            serviceRunning = true;
+        }
+    }
 
     /**
      * Class used for the client Binder.  Because we know this service always
