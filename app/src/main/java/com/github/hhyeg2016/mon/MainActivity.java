@@ -16,7 +16,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.hhyeg2016.mon.display.DisplayAdapter;
 import com.github.hhyeg2016.mon.monitor.MonitorService;
+import com.github.hhyeg2016.mon.monitor.MonitorServiceThread;
+import com.github.hhyeg2016.mon.phone.PhoneLogger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,21 +50,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
+        // kludging a context in like a bau5
+        new MonitorServiceThread(getApplicationContext());
+        bindService(
+                new Intent(getApplicationContext(), MonitorService.class),
+                mConnection, BIND_AUTO_CREATE
+        );
+        addNotification();
+
+        // phone stuff
+        String[] phoneStuff = PhoneLogger.getPhoneLogs(getApplicationContext());
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        bindService(
-                new Intent(getApplicationContext(), MonitorService.class),
-                mConnection, BIND_AUTO_CREATE
-        );
-        addNotification();
+        mAdapter = new DisplayAdapter(phoneStuff);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
