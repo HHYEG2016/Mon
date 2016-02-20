@@ -1,6 +1,10 @@
 package com.github.hhyeg2016.mon;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +12,30 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.hhyeg2016.mon.com.github.hhyeg2016.mon.monitor.MonitorService;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static boolean mBound;
+    private MonitorService mService;
+
+    /** Defines callbacks for service binding, passed to bindService() */
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            MonitorService.LocalBinder binder = (MonitorService.LocalBinder) service;
+            mService = binder.getService();
+            mBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -30,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        getApplicationContext().bindService(
+                new Intent(getApplicationContext(), MonitorService.class),
+                mConnection, BIND_AUTO_CREATE
+        );
+
+
+        Intent intent = new Intent(this, MonitorService.class);
+        startService(intent);
         // specify an adapter (see also next example)
         // mAdapter = new MyAdapter(myDataset);
         // mRecyclerView.setAdapter(mAdapter);
