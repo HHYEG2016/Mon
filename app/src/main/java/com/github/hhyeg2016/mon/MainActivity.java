@@ -20,10 +20,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.hhyeg2016.mon.data.AppData;
+import com.github.hhyeg2016.mon.data_manager.AppDataManager;
 import com.github.hhyeg2016.mon.display.DisplayAdapter;
 import com.github.hhyeg2016.mon.monitor.MonitorService;
 import com.github.hhyeg2016.mon.monitor.MonitorServiceThread;
 import com.github.hhyeg2016.mon.phone.PhoneLogger;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_CALL_LOG}, 0);
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.PACKAGE_USAGE_STATS}, 1);
         }
 
 
@@ -83,6 +89,15 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new DisplayAdapter(phoneStuff, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        // app stuff
+        AppDataManager appDataManager = new AppDataManager(getApplicationContext());
+        ArrayList<AppData> appDataList = appDataManager.retrieveAll();
     }
 
     @Override

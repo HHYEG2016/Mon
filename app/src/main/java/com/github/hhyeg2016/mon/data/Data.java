@@ -5,12 +5,13 @@ package com.github.hhyeg2016.mon.data;
  */
 public abstract class Data {
     private String type;
+    private Long logTime;
 
-    public Integer getLogTime() {
+    public Long getLogTime() {
         return logTime;
     }
 
-    public void setLogTime(Integer logTime) {
+    public void setLogTime(Long logTime) {
         this.logTime = logTime;
     }
 
@@ -22,5 +23,4 @@ public abstract class Data {
         this.type = type;
     }
 
-    private Integer logTime;
 }
