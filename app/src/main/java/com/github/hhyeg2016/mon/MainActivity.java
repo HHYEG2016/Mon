@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 import com.github.hhyeg2016.mon.monitor.MonitorService;
 import com.github.hhyeg2016.mon.monitor.MonitorServiceThread;
+import com.github.hhyeg2016.mon.phone.PhoneLogger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
                 mConnection, BIND_AUTO_CREATE
         );
         addNotification();
+
+        // phone stuff
+        PhoneLogger.getPhoneLogs(getApplicationContext());
     }
 
     @Override

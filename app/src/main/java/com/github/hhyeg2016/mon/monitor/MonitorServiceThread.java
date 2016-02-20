@@ -8,12 +8,7 @@ import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import com.github.hhyeg2016.mon.phone.PhoneLogger;
-
 public class MonitorServiceThread extends Thread {
-    public static String SERVICE_THREAD_HASH = "SERVICE_THREAD_HASH";
-    public static String SERVICE_THREAD_PING_COUNT = "SERVICE_THREAD_PING_COUNT";
-
     private static Context context;
 
     private static int pingCount = 0;
@@ -28,12 +23,7 @@ public class MonitorServiceThread extends Thread {
 
     public void run() {
         do {
-            Log.i(SERVICE_THREAD_HASH, "id: " + this.hashCode());
-            Log.i(SERVICE_THREAD_PING_COUNT, "pc: " + pingCount);
             logUStats();
-
-            PhoneLogger.getPhoneLogs(MonitorServiceThread.context);
-
             pingCount++;
             try {
                 Thread.sleep(REFRESH_RATE);
