@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.github.hhyeg2016.mon.monitor.MonitorService;
+import com.github.hhyeg2016.mon.monitor.MonitorServiceThread;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        // kludging a context in like a bau5
+        new MonitorServiceThread(getApplicationContext());
         bindService(
                 new Intent(getApplicationContext(), MonitorService.class),
                 mConnection, BIND_AUTO_CREATE
