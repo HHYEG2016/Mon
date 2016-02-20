@@ -8,13 +8,17 @@ import android.provider.CallLog;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
 public class PhoneLogger {
     public static String PHONE = "PHONE_PING";
 
-    public static void getPhoneLogs(Context context) {
+    public static String[] getPhoneLogs(Context context) {
+
+        ArrayList<String> phoneValues = new ArrayList<String>();
+
         Log.i(PHONE, "RUNNING");
         try {
             Cursor c = context.getContentResolver().query(
@@ -25,7 +29,7 @@ public class PhoneLogger {
                 // NO PERMISSIONS
                 // TODO. Handle permissions
                 Log.i(PHONE, "Read call log not set");
-                return;
+                return new String[0];
             }
             /*
             // Column name types
@@ -67,12 +71,19 @@ public class PhoneLogger {
                         break;
                 }
 
-                Log.i(PHONE, phNum + ", " + sCallType + ", " + callDayTime.toString() + ", " + callDuration);
+                String curVal = phNum + ", " + sCallType + ", " + callDayTime.toString() + ", " + callDuration;
+                Log.i(PHONE, curVal);
+                phoneValues.add(curVal);
             }
 
             c.close();
         } catch (Exception e) {
             Log.i(PHONE, e.toString());
         }
+
+        String[] phoneValuesArr = new String[phoneValues.size()];
+        phoneValuesArr = phoneValues.toArray(phoneValuesArr);
+
+        return phoneValuesArr;
     }
 }
