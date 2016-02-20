@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new DisplayAdapter(phoneStuff);
+        mAdapter = new DisplayAdapter(phoneStuff, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
     }
 
