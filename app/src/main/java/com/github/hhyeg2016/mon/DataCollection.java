@@ -16,8 +16,8 @@ public class DataCollection {
         dataCollection.add(call);
     }
 
-    public void addText(Integer logTime, String message) {
-        Text text = new Text(logTime, message);
+    public void addText(Integer logTime) {
+        Text text = new Text(logTime);
         dataCollection.add(text);
     }
 
