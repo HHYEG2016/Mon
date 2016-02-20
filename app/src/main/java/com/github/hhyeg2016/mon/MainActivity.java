@@ -16,13 +16,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.hhyeg2016.mon.data.AppData;
+import com.github.hhyeg2016.mon.data_manager.AppDataManager;
 import com.github.hhyeg2016.mon.display.DisplayAdapter;
 import com.github.hhyeg2016.mon.monitor.MonitorService;
 import com.github.hhyeg2016.mon.monitor.MonitorServiceThread;
 import com.github.hhyeg2016.mon.phone.PhoneLogger;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,6 +89,15 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new DisplayAdapter(phoneStuff);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        // app stuff
+        AppDataManager appDataManager = new AppDataManager(getApplicationContext());
+        ArrayList<AppData> appDataList = appDataManager.retrieveAll();
     }
 
     @Override

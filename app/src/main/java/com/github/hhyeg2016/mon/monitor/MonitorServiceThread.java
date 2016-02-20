@@ -6,7 +6,11 @@ import android.app.usage.UsageEvents;
 import android.app.usage.UsageStatsManager;
 import android.util.Log;
 
+import com.github.hhyeg2016.mon.data.AppData;
+import com.github.hhyeg2016.mon.data_manager.AppDataManager;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,7 +18,7 @@ public class MonitorServiceThread extends Thread {
     private static Context context;
 
     private static int pingCount = 0;
-    private static int REFRESH_RATE = 20000;
+    private static int REFRESH_RATE = 2000;
 
     public MonitorServiceThread() {}
 
@@ -25,7 +29,7 @@ public class MonitorServiceThread extends Thread {
 
     public void run() {
         do {
-            //logUStats();
+            logUStats();
             pingCount++;
             try {
                 Thread.sleep(REFRESH_RATE);
@@ -52,28 +56,29 @@ public class MonitorServiceThread extends Thread {
         calendar.add(Calendar.MILLISECOND, -REFRESH_RATE);
         long startTime = calendar.getTimeInMillis();
 
-        Log.d(TAG, "Range start:" + dateFormat.format(startTime) );
-        Log.d(TAG, "Range end:" + dateFormat.format(endTime));
+        //Log.d(TAG, "Range start:" + dateFormat.format(startTime));
+        //Log.d(TAG, "Range end:" + dateFormat.format(endTime));
 
         // For now I have two ways of getting information from the UsageStatsManager
         // I can get the total foreground time of an app
         // I can also get the opening / closing events of an app
 
-        List<UsageStats> list = usm.queryUsageStats(UsageStatsManager.INTERVAL_BEST, startTime, endTime);
-        for(int i = 0; i < list.size(); i++) {
-            Log.d(TAG, String.valueOf(list.get(i).getPackageName()) + " " + String.valueOf(list.get(i).getTotalTimeInForeground()));
-            Log.d(TAG, String.valueOf(list.get(i).getLastTimeStamp() - list.get(i).getFirstTimeStamp()));
-            Log.d(TAG, "");
-        }
+        //List<UsageStats> list = usm.queryUsageStats(UsageStatsManager.INTERVAL_BEST, startTime, endTime);
+        //for(int i = 0; i < list.size(); i++) {
+        //    Log.d(TAG, String.valueOf(list.get(i).getPackageName()) + " " + String.valueOf(list.get(i).getTotalTimeInForeground()));
+        //    Log.d(TAG, String.valueOf(list.get(i).getLastTimeStamp() - list.get(i).getFirstTimeStamp()));
+        //    Log.d(TAG, "");
+        //}
 
         UsageEvents events = usm.queryEvents(startTime, endTime);
         while (events.hasNextEvent()){
             UsageEvents.Event e = new UsageEvents.Event();
             events.getNextEvent(e);
 
-            if (e != null){
-                Log.d(TAG, "Event: " + e.getPackageName() + "\t" +  e.getTimeStamp() + "\t" + e.getEventType());
-            }
+            AppDataManager appDataManager = new AppDataManager(context);
+            //Log.d(TAG, "Event: " + e.getPackageName() + "\t" +  e.getTimeStamp() + "\t" + e.getEventType());
+            AppData appData = new AppData(e.getTimeStamp(), e.getPackageName(), String.valueOf(e.getEventType()));
+            appDataManager.insert(appData);
         }
     }
 }
