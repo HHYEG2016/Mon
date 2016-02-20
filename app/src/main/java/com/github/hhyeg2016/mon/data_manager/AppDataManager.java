@@ -15,9 +15,6 @@ import java.util.UUID;
 public class AppDataManager  extends StoringManager<AppData>{
     private static DBHelper helper = null;
     protected ContentValues values;
-    protected String selection;
-    protected String[] sArgs;
-    protected String[] projection;
 
     public AppDataManager(Context context) {
         helper = DBHelper.getInstance(context);
@@ -32,7 +29,7 @@ public class AppDataManager  extends StoringManager<AppData>{
 
     @Override
     public ArrayList<AppData> retrieveAll() {
-        ArrayList<AppData> results = new ArrayList<AppData>();
+        ArrayList<AppData> results = new ArrayList<>();
         SQLiteDatabase db = helper.getReadableDatabase();
 
         // Querying the database
@@ -52,11 +49,6 @@ public class AppDataManager  extends StoringManager<AppData>{
         }
         cursor.close();
         return results;
-    }
-
-    @Override
-    public void update(AppData newObject) {
-        // TODO
     }
 
     @Override
