@@ -25,7 +25,7 @@ public class MonitorServiceThread extends Thread {
 
     public void run() {
         do {
-            logUStats();
+            //logUStats();
             pingCount++;
             try {
                 Thread.sleep(REFRESH_RATE);

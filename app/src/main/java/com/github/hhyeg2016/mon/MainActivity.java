@@ -1,5 +1,6 @@
 package com.github.hhyeg2016.mon;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -7,15 +8,19 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.hhyeg2016.mon.display.DisplayAdapter;
 import com.github.hhyeg2016.mon.monitor.MonitorService;
 import com.github.hhyeg2016.mon.monitor.MonitorServiceThread;
 import com.github.hhyeg2016.mon.phone.PhoneLogger;
@@ -49,15 +54,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
 
         // kludging a context in like a bau5
         new MonitorServiceThread(getApplicationContext());
@@ -67,8 +63,26 @@ public class MainActivity extends AppCompatActivity {
         );
         addNotification();
 
+        // CHECK PERMISSIONS
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_CALL_LOG}, 0);
+        }
+
+
         // phone stuff
-        PhoneLogger.getPhoneLogs(getApplicationContext());
+        String[] phoneStuff = PhoneLogger.getPhoneLogs(getApplicationContext());
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new DisplayAdapter(phoneStuff);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
