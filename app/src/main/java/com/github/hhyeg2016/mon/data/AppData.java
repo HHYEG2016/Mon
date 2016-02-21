@@ -3,10 +3,10 @@ package com.github.hhyeg2016.mon.data;
 public class AppData extends Data {
     private String appName;
     private String eventType;
-
+    public static final String APP = "App";
 
     public AppData(Long logTime, String appName, String eventType) {
-        this.setType("AppData");
+        this.setType(AppData.APP);
         this.setLogTime(logTime);
         this.setAppName(appName);
         this.setEventType(eventType);

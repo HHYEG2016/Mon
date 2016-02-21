@@ -40,8 +40,11 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private AppDataManager appDataManager;
 
     private static MonitorService mService;
+
+    ArrayList<AppData> adlist;
 
     /**
      * Defines callbacks for service binding, passed to bindService()
@@ -86,11 +89,18 @@ public class MainActivity extends AppCompatActivity {
                     }, 0);
         }
 
+        // app stuff
+        appDataManager = new AppDataManager(getApplicationContext());
+        adlist = appDataManager.retrieveAll();
+
         // phone stuff
         ArrayList<PhoneData> phlist = PhoneLogger.getPhoneLogs(getApplicationContext());
         ArrayList<TextData> tdlist = TextLogger.getTextLogs(getApplicationContext());
 
+        Log.i("Debug", String.valueOf(adlist.size()));
+
         ArrayList<Data> masterList = new ArrayList<>();
+        masterList.addAll(adlist);
         masterList.addAll(phlist);
         masterList.addAll(tdlist);
 
@@ -117,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         // app stuff
-        AppDataManager appDataManager = new AppDataManager(getApplicationContext());
-        ArrayList<AppData> appDataList = appDataManager.retrieveAll();
+        appDataManager = new AppDataManager(getApplicationContext());
+        adlist = appDataManager.retrieveAll();
     }
 
     @Override
