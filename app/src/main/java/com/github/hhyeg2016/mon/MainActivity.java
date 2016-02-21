@@ -22,6 +22,8 @@ import android.view.MenuItem;
 
 import com.github.hhyeg2016.mon.data.TextData;
 import com.github.hhyeg2016.mon.data_logger.TextLogger;
+import com.github.hhyeg2016.mon.data.AppData;
+import com.github.hhyeg2016.mon.data_manager.AppDataManager;
 import com.github.hhyeg2016.mon.display.DisplayAdapter;
 import com.github.hhyeg2016.mon.monitor.MonitorService;
 import com.github.hhyeg2016.mon.monitor.MonitorServiceThread;
@@ -95,8 +97,17 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new DisplayAdapter(phoneStuff);
+        mAdapter = new DisplayAdapter(phoneStuff, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // app stuff
+        AppDataManager appDataManager = new AppDataManager(getApplicationContext());
+        ArrayList<AppData> appDataList = appDataManager.retrieveAll();
     }
 
     @Override
