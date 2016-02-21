@@ -5,9 +5,14 @@ import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.github.hhyeg2016.mon.data.AppData;
+import com.github.hhyeg2016.mon.data_logger.AppLogger;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -19,7 +24,10 @@ import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class ChartAppDataActivity extends AppCompatActivity {
 
@@ -60,8 +68,8 @@ public class ChartAppDataActivity extends AppCompatActivity {
         //mChart.getViewPortHandler().setMaximumScaleX(2f);
 
         // add data
-        setData(10, 100);
-
+        // TODO: ArrayList<AppData> set
+        setData(AppLogger.getAppDataLogs(getApplicationContext()));
     }
 
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
@@ -80,7 +88,7 @@ public class ChartAppDataActivity extends AppCompatActivity {
                 break;
             }
             case R.id.actionToggleHighlight: {
-                if(mChart.getData() != null) {
+                if (mChart.getData() != null) {
                     mChart.getData().setHighlightEnabled(!mChart.getData().isHighlightEnabled());
                     mChart.invalidate();
                 }
@@ -134,16 +142,16 @@ public class ChartAppDataActivity extends AppCompatActivity {
         return true;
     }
 
-    private void setData(int count, float range) {
-
+    private void setData(ArrayList<AppData> adList) {
+        int numHours = 24;
         ArrayList<String> xVals = new ArrayList<String>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < numHours; i++) {
             xVals.add((i) + "");
         }
 
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < numHours; i++) {
 
             Random r = new Random();
             int Low = 5;
@@ -186,6 +194,32 @@ public class ChartAppDataActivity extends AppCompatActivity {
 
         // set data
         mChart.setData(data);
-    }
 
+
+        // Setting app name data
+        Set<String> appNames = new HashSet<>();
+        Set<String> appTimes = new HashSet<>();
+        for (AppData appData : adList) {
+            appNames.add(appData.getAppName());
+            Calendar cl = Calendar.getInstance();
+            cl.setTimeInMillis(appData.getLogTime());
+            String date = "" + cl.get(Calendar.DAY_OF_MONTH) + " " + cl.get(Calendar.MONTH) + " " + cl.get(Calendar.YEAR);
+            appTimes.add(date);
+        }
+        Spinner app_name_spinner = (Spinner) findViewById(R.id.app_name_spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                appNames.toArray(new String[appNames.size()])
+        );
+        // Apply the adapter to the spinner
+        app_name_spinner.setAdapter(adapter);
+        Spinner app_date_spinner = (Spinner) findViewById(R.id.ad_date_spinner);
+        ArrayAdapter<String> adapterDate = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                appTimes.toArray(new String[appTimes.size()])
+        );
+        app_date_spinner.setAdapter(adapterDate);
+    }
 }
