@@ -24,6 +24,7 @@ import com.github.hhyeg2016.mon.data.Data;
 import com.github.hhyeg2016.mon.data.DataComparator;
 import com.github.hhyeg2016.mon.data.PhoneData;
 import com.github.hhyeg2016.mon.data.TextData;
+import com.github.hhyeg2016.mon.data_logger.AppLogger;
 import com.github.hhyeg2016.mon.data_logger.TextLogger;
 import com.github.hhyeg2016.mon.data.AppData;
 import com.github.hhyeg2016.mon.data_manager.AppDataManager;
@@ -90,8 +91,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // app stuff
-        appDataManager = new AppDataManager(getApplicationContext());
-        adlist = appDataManager.retrieveAll();
+        //appDataManager = new AppDataManager(getApplicationContext());
+        //adlist = appDataManager.retrieveAll();
+        adlist = AppLogger.getAppDataLogs(getApplicationContext());
 
         // phone stuff
         ArrayList<PhoneData> phlist = PhoneLogger.getPhoneLogs(getApplicationContext());
@@ -127,8 +129,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         // app stuff
-        appDataManager = new AppDataManager(getApplicationContext());
-        adlist = appDataManager.retrieveAll();
+        //appDataManager = new AppDataManager(getApplicationContext());
+        //adlist = appDataManager.retrieveAll();
+        adlist = AppLogger.getAppDataLogs(getApplicationContext());
     }
 
     @Override

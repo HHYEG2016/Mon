@@ -6,4 +6,13 @@
     <string name="graph">Graph</string>
     <string name="title_activity_graph">Mon</string>
     <string name="title_activity_graph_nav">Mon Graphs</string>
+    <string name="actionToggleHighlight">Toggle Highlight</string>
+    <string name="actionTogglePinch">Toggle Pinch</string>
+    <string name="actionToggleAutoScaleMinMax">Toggle Auto Scale Min Max</string>
+    <string name="actionToggleHighlightArrow">Toggle Highlight Arrow</string>
+    <string name="animateX">Animate X</string>
+    <string name="animateY">Animate Y</string>
+    <string name="animateXY">Animate X and Y</string>
+    <string name="actionSave">Save</string>
+    <string name="actionToggleValues">Toggle Values</string>
 </resources>
