@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_graph) {
-            Intent intent = new Intent(MainActivity.this, ChartAppDataActivity.class);
+            Intent intent = new Intent(MainActivity.this, GraphNavActivity.class);
             startActivity(intent);
             return true;
         }

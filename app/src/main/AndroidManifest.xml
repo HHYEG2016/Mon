@@ -15,7 +15,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -36,11 +35,21 @@
 
         <activity
             android:name=".ChartAppDataActivity"
-            android:label="@string/title_activity_graph"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:label="@string/title_activity_chart_app_data"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GraphNavActivity"
+            android:label="@string/title_activity_graph_nav"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChartTextDataActivity"
+            android:label="@string/title_activity_chart_text_data"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChartPhoneDataActivity"
+            android:label="@string/title_activity_chart_phone_data"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

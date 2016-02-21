@@ -85,8 +85,7 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHold
             AppData appData = (AppData) rawData;
             imageView.setImageDrawable(context.getDrawable(R.drawable.ic_action_name3));
             title.setText(AppData.APP);
-            String temp = appData.getAppName();
-            info1.setText(slice_range(temp, (temp.lastIndexOf('.')+1), temp.length()));
+            info1.setText(appData.getAppName());
             time.setText((new Date(appData.getLogTime())).toString());
             info2.setText(appData.getEventType());
         }
@@ -97,13 +96,6 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHold
     @Override
     public int getItemCount() {
         return mDataset.size();
-    }
-
-    public String slice_range(String s, int startIndex, int endIndex) {
-        if (startIndex == 0) return s;
-        if (startIndex < 0) startIndex = s.length() + startIndex;
-        if (endIndex < 0) endIndex = s.length() + endIndex;
-        return s.substring(startIndex, endIndex);
     }
 }
 

@@ -5,6 +5,7 @@
     <string name="service_status_monitor">Mon is watching…</string>
     <string name="graph">Graph</string>
     <string name="title_activity_graph">Mon</string>
+    <string name="title_activity_graph_nav">Mon Graphs</string>
     <string name="actionToggleHighlight">Toggle Highlight</string>
     <string name="actionTogglePinch">Toggle Pinch</string>
     <string name="actionToggleAutoScaleMinMax">Toggle Auto Scale Min Max</string>
@@ -14,4 +15,7 @@
     <string name="animateXY">Animate X and Y</string>
     <string name="actionSave">Save</string>
     <string name="actionToggleValues">Toggle Values</string>
+    <string name="title_activity_chart_text_data">Text Chart</string>
+    <string name="title_activity_chart_phone_data">Phone Chart</string>
+    <string name="title_activity_chart_app_data">App Chart</string>
 </resources>
