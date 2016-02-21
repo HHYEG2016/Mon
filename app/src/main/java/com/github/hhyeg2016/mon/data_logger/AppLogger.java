@@ -31,10 +31,19 @@ public class AppLogger {
             UsageEvents.Event e = new UsageEvents.Event();
             events.getNextEvent(e);
 
-            AppData appData = new AppData(e.getTimeStamp(), e.getPackageName(), String.valueOf(e.getEventType()));
+            String temp = e.getPackageName();
+
+            AppData appData = new AppData(e.getTimeStamp(), slice_range(temp, (temp.lastIndexOf('.')+1), temp.length()), String.valueOf(e.getEventType()));
             appDataArrayList.add(appData);
         }
 
         return appDataArrayList;
+    }
+
+    public static String slice_range(String s, int startIndex, int endIndex) {
+        if (startIndex == 0) return s;
+        if (startIndex < 0) startIndex = s.length() + startIndex;
+        if (endIndex < 0) endIndex = s.length() + endIndex;
+        return s.substring(startIndex, endIndex);
     }
 }
