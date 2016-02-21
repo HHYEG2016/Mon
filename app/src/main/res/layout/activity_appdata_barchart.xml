@@ -19,11 +19,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!-- TODO HEIGHT SHOULDN'T BE 500 DP -->
+    <!-- TODO HEIGHT SHOULDN'T BE 450 DP -->
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart1"
         android:layout_width="match_parent"
-        android:layout_height="500dp" />
+        android:layout_height="450dp" />
 
 
     <Spinner
