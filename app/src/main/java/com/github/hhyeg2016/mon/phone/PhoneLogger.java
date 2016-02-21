@@ -8,16 +8,17 @@ import android.provider.CallLog;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.github.hhyeg2016.mon.data.PhoneData;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 public class PhoneLogger {
     public static String PHONE = "PHONE_PING";
 
-    public static String[] getPhoneLogs(Context context) {
+    public static ArrayList<PhoneData> getPhoneLogs(Context context) {
 
-        ArrayList<String> phoneValues = new ArrayList<String>();
+        ArrayList<PhoneData> listPhoneData = new ArrayList<>();
 
         Log.i(PHONE, "RUNNING");
         try {
@@ -26,7 +27,7 @@ public class PhoneLogger {
                 // NO PERMISSIONS
                 // TODO. Handle permissions
                 Log.i(PHONE, "Read call log not set");
-                return new String[0];
+                return listPhoneData;
             }
             Cursor c = context.getContentResolver().query(
                     CallLog.Calls.CONTENT_URI, null, null, null, null
@@ -55,25 +56,11 @@ public class PhoneLogger {
                 String phNum = c.getString(number);
                 int callType = c.getInt(type);
                 String callDate = c.getString(date);
-                Date callDayTime = new Date(Long.valueOf(callDate));
+                Long longCallDate = Long.valueOf(callDate).longValue();
                 String callDuration = c.getString(duration);
 
-                String sCallType = "Unknown";
-                switch (callType) {
-                    case CallLog.Calls.OUTGOING_TYPE:
-                        sCallType = "Outgoing";
-                        break;
-                    case CallLog.Calls.INCOMING_TYPE:
-                        sCallType = "Incoming";
-                        break;
-                    case CallLog.Calls.MISSED_TYPE:
-                        sCallType = "Missed";
-                        break;
-                }
-
-                String curVal = phNum + ", " + sCallType + ", " + callDayTime.toString() + ", " + callDuration;
-                Log.i(PHONE, curVal);
-                phoneValues.add(curVal);
+                PhoneData phoneData = new PhoneData(longCallDate, phNum, callType, callDuration);
+                listPhoneData.add(phoneData);
             }
 
             c.close();
@@ -81,9 +68,6 @@ public class PhoneLogger {
             Log.i(PHONE, e.toString());
         }
 
-        String[] phoneValuesArr = new String[phoneValues.size()];
-        phoneValuesArr = phoneValues.toArray(phoneValuesArr);
-
-        return phoneValuesArr;
+        return listPhoneData;
     }
 }

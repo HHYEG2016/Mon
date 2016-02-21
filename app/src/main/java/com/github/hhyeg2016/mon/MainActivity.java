@@ -78,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         // phone stuff
-        String[] phoneStuff = PhoneLogger.getPhoneLogs(getApplicationContext());
+        //String[] phoneStuff = PhoneLogger.getPhoneLogs(getApplicationContext());
+        String[] phoneStuff = {};
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
