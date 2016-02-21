@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/actionToggleValues"
+        android:title="Toggle Values">
+    </item>
+    <item
+        android:id="@+id/actionToggleFilled"
+        android:title="Toggle Filled">
+    </item>
+    <item
+        android:id="@+id/actionToggleCircles"
+        android:title="Toggle Circles">
+    </item>
+    <item
+        android:id="@+id/actionToggleCubic"
+        android:title="Toggle Cubic">
+    </item>
+    <item
+        android:id="@+id/actionToggleHighlight"
+        android:title="Toggle Highlight">
+    </item>
+</menu>
