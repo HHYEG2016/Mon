@@ -214,138 +214,10 @@ public class GraphActivity extends AppCompatActivity {
 //        set1.setVisible(false);
 //        set1.setCircleHoleColor(Color.WHITE);
 
-        ArrayList<Entry> yVals2 = new ArrayList<Entry>();
 
-        for (int i = 0; i < count; i++) {
-            Random r = new Random();
-            int Low = 0;
-            int High = 4;
-            int Result = r.nextInt(High-Low) + Low;
-
-            float val = (float) (Result) ;// + (float)
-            // ((mult *
-            // 0.1) / 10);
-            // ((mult *
-            // 0.1) / 10);
-            yVals2.add(new Entry(val, i));
-        }
-
-        // create a dataset and give it a type
-        LineDataSet ketonesSet = new LineDataSet(yVals2, "Ketones");
-        ketonesSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-        ketonesSet.setColor(Color.RED);
-        ketonesSet.setCircleColor(Color.RED);
-        ketonesSet.setLineWidth(2f);
-        ketonesSet.setCircleRadius(3f);
-        ketonesSet.setFillAlpha(65);
-        ketonesSet.setFillColor(Color.RED);
-        ketonesSet.setDrawCircleHole(false);
-        ketonesSet.setHighLightColor(Color.rgb(244, 117, 117));
-        //set2.setFillFormatter(new MyFillFormatter(900f));
-
-        //        ArrayList<String> xVals = new ArrayList<String>();
-//        for (int i = 0; i < count; i++) {
-//            xVals.add((i) + "");
-//        }
-//
-        ArrayList<Entry> yVals3 = new ArrayList<Entry>();
-
-        for (int i = 0; i < count; i++) {
-
-            Random r = new Random();
-            int Low = 0;
-            int High = 3;
-            int Result = r.nextInt(High-Low) + Low;
-
-            float val = (float) (Result) ;// + (float)
-            // ((mult *
-            // 0.1) / 10);
-            yVals3.add(new Entry(val, i));
-        }
-
-        // create a dataset and give it a type
-//        LineDataSet proteinSet = new LineDataSet(yVals3, "Protein");
-        // set1.setFillAlpha(110);
-        // set1.setFillColor(Color.RED);
-        LineDataSet proteinSet = new LineDataSet(yVals3, "Protein");
-        proteinSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-        proteinSet.setColor(Color.DKGRAY);
-        proteinSet.setCircleColor(Color.DKGRAY);
-        proteinSet.setLineWidth(2f);
-        proteinSet.setCircleRadius(3f);
-        proteinSet.setFillAlpha(65);
-        proteinSet.setFillColor(Color.DKGRAY);
-        proteinSet.setDrawCircleHole(false);
-        proteinSet.setHighLightColor(Color.rgb(244, 117, 117));
-//
-
-        ArrayList<Entry> yVals4 = new ArrayList<Entry>();
-
-        for (int i = 0; i < count; i++) {
-
-            Random r = new Random();
-            int Low = 0;
-            int High =5;
-            int Result = r.nextInt(High-Low) + Low;
-
-            float val = (float) (Result) ;// + (float)
-            // ((mult *
-            // 0.1) / 10);
-            yVals4.add(new Entry(val, i));
-        }
-
-        // create a dataset and give it a type
-        LineDataSet hemoglobinSet = new LineDataSet(yVals4, "Hemoglobin");
-        // set1.setFillAlpha(110);
-        // set1.setFillColor(Color.RED);
-
-//        // set the line to be drawn like this "- - - - - -"
-        hemoglobinSet.enableDashedLine(10f, 5f, 0f);
-        hemoglobinSet.enableDashedHighlightLine(10f, 5f, 0f);
-        hemoglobinSet.setColor(Color.MAGENTA);
-        hemoglobinSet.setCircleColor(Color.MAGENTA);
-        hemoglobinSet.setLineWidth(1f);
-        hemoglobinSet.setCircleRadius(3f);
-        hemoglobinSet.setDrawCircleHole(false);
-        hemoglobinSet.setValueTextSize(9f);
-
-        ArrayList<Entry> yVals5 = new ArrayList<Entry>();
-
-        for (int i = 0; i < count; i++) {
-
-            Random r = new Random();
-            int Low = 0;
-            int High = 5;
-            int Result = r.nextInt(High - Low) + Low;
-
-            float val = (float) (Result) ;// + (float)
-            // ((mult *
-            // 0.1) / 10);
-            yVals5.add(new Entry(val, i));
-        }
-
-        // create a dataset and give it a type
-        LineDataSet glucoseSet = new LineDataSet(yVals5, "Glucose");
-        // set1.setFillAlpha(110);
-        // set1.setFillColor(Color.RED);
-
-//        // set the line to be drawn like this "- - - - - -"
-        glucoseSet.enableDashedLine(10f, 5f, 0f);
-        glucoseSet.enableDashedHighlightLine(10f, 5f, 0f);
-        glucoseSet.setColor(Color.CYAN);
-        glucoseSet.setCircleColor(Color.CYAN);
-        glucoseSet.setLineWidth(1f);
-        glucoseSet.setCircleRadius(3f);
-        glucoseSet.setDrawCircleHole(false);
-        glucoseSet.setValueTextSize(9f);
-//        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-        dataSets.add(ketonesSet);
-        dataSets.add(glucoseSet);
-        dataSets.add(proteinSet);
-
         dataSets.add(phSet); // add the datasets
-        dataSets.add(hemoglobinSet); // add the datasets
+        // dataSets.add(phSet); // can have multiple data sets
 
         // create a data object with the datasets
         LineData data = new LineData(xVals, dataSets);
@@ -364,4 +236,3 @@ public class GraphActivity extends AppCompatActivity {
     }
 
 }
-
