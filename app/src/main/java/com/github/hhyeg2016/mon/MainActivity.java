@@ -16,13 +16,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.hhyeg2016.mon.data.TextData;
+import com.github.hhyeg2016.mon.data_logger.TextLogger;
 import com.github.hhyeg2016.mon.display.DisplayAdapter;
 import com.github.hhyeg2016.mon.monitor.MonitorService;
 import com.github.hhyeg2016.mon.monitor.MonitorServiceThread;
-import com.github.hhyeg2016.mon.phone.PhoneLogger;
+import com.github.hhyeg2016.mon.data_logger.PhoneLogger;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static MonitorService mService;
 
-    /** Defines callbacks for service binding, passed to bindService() */
+    /**
+     * Defines callbacks for service binding, passed to bindService()
+     */
     private ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
@@ -66,14 +73,20 @@ public class MainActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) !=
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_CALL_LOG}, 0);
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.PACKAGE_USAGE_STATS}, 1);
+                    new String[]{
+                            Manifest.permission.READ_CALL_LOG,
+                            Manifest.permission.PACKAGE_USAGE_STATS,
+                            Manifest.permission.READ_SMS
+                    }, 0);
         }
 
 
         // phone stuff
         String[] phoneStuff = PhoneLogger.getPhoneLogs(getApplicationContext());
+        ArrayList<TextData> tdlist = TextLogger.getTextLogs(getApplicationContext());
+        for (TextData td : tdlist) {
+            Log.i("TEXT_PING", td.getAddress() + ", " + td.getState() + ", " + td.getSubState() + ", " + td.getLogTime());
+        }
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
