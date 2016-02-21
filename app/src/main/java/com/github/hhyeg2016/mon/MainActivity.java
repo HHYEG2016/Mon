@@ -20,6 +20,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.hhyeg2016.mon.data.Data;
+import com.github.hhyeg2016.mon.data.PhoneData;
 import com.github.hhyeg2016.mon.data.TextData;
 import com.github.hhyeg2016.mon.data_logger.TextLogger;
 import com.github.hhyeg2016.mon.data.AppData;
@@ -84,12 +86,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         // phone stuff
-        //String[] phoneStuff = PhoneLogger.getPhoneLogs(getApplicationContext());
-        String[] phoneStuff = {};
+        ArrayList<PhoneData> phlist = PhoneLogger.getPhoneLogs(getApplicationContext());
         ArrayList<TextData> tdlist = TextLogger.getTextLogs(getApplicationContext());
         for (TextData td : tdlist) {
             Log.i("TEXT_PING", td.getAddress() + ", " + td.getState() + ", " + td.getSubState() + ", " + td.getLogTime());
         }
+
+        ArrayList<Data> masterList = new ArrayList<>();
+        masterList.addAll(phlist);
+        masterList.addAll(tdlist);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -98,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new DisplayAdapter(phoneStuff, getApplicationContext());
+        mAdapter = new DisplayAdapter(masterList, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
     }
 

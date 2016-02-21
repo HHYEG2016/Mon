@@ -10,9 +10,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.hhyeg2016.mon.R;
+import com.github.hhyeg2016.mon.data.Data;
+
+import java.util.ArrayList;
 
 public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHolder> {
-    private String[] mDataset;
+    private ArrayList<Data> mDataset;
     private Context context;
 
     // Provide a reference to the views for each data item
@@ -28,7 +31,7 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHold
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public DisplayAdapter(String[] myDataset, Context context) {
+    public DisplayAdapter(ArrayList<Data> myDataset, Context context) {
         mDataset = myDataset;
         this.context = context;
     }
@@ -67,6 +70,6 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHold
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
     }
 }
