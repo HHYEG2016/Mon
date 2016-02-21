@@ -3,4 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="service_name">Mon Service</string>
     <string name="service_status_monitor">Mon is watching…</string>
+    <string name="graph">Graph</string>
+    <string name="title_activity_graph">Mon</string>
 </resources>
