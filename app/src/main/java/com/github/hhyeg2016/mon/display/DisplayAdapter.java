@@ -18,6 +18,8 @@ import com.github.hhyeg2016.mon.data.TextData;
 import java.util.ArrayList;
 import java.util.Date;
 
+import java.io.*;
+
 public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHolder> {
     private ArrayList<Data> mDataset;
     private Context context;
@@ -83,7 +85,8 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHold
             AppData appData = (AppData) rawData;
             imageView.setImageDrawable(context.getDrawable(R.drawable.ic_action_name3));
             title.setText(AppData.APP);
-            info1.setText(appData.getAppName());
+            String temp = appData.getAppName();
+            info1.setText(slice_range(temp, (temp.lastIndexOf('.')+1), temp.length()));
             time.setText((new Date(appData.getLogTime())).toString());
             info2.setText(appData.getEventType());
         }
@@ -95,4 +98,12 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHold
     public int getItemCount() {
         return mDataset.size();
     }
+
+    public String slice_range(String s, int startIndex, int endIndex) {
+        if (startIndex == 0) return s;
+        if (startIndex < 0) startIndex = s.length() + startIndex;
+        if (endIndex < 0) endIndex = s.length() + endIndex;
+        return s.substring(startIndex, endIndex);
+    }
 }
+
