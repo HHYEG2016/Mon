@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Hi Subject"
+        android:text="Hi Peyman"
         android:id="@+id/title"
         android:layout_below="@+id/divider1"
         android:layout_centerHorizontal="true"
@@ -88,7 +88,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
+        android:id="@+id/graph2"
         android:layout_alignTop="@+id/calls"
         android:layout_alignStart="@+id/graph1"
         android:layout_alignBottom="@+id/calls"
@@ -97,11 +97,11 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton2"
+        android:id="@+id/graph3"
         android:layout_alignTop="@+id/coolstuff"
         android:src="@drawable/ic_action_graph2"
-        android:layout_alignStart="@+id/imageButton"
-        android:layout_alignEnd="@+id/imageButton"
+        android:layout_alignStart="@+id/graph2"
+        android:layout_alignEnd="@+id/graph2"
         android:layout_alignBottom="@+id/coolstuff" />
 
 </RelativeLayout>

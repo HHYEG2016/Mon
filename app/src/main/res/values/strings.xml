@@ -15,4 +15,7 @@
     <string name="animateXY">Animate X and Y</string>
     <string name="actionSave">Save</string>
     <string name="actionToggleValues">Toggle Values</string>
+    <string name="title_activity_chart_text_data">Text Chart</string>
+    <string name="title_activity_chart_phone_data">Phone Chart</string>
+    <string name="title_activity_chart_app_data">App Chart</string>
 </resources>
