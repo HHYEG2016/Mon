@@ -5,4 +5,5 @@
     <string name="service_status_monitor">Mon is watching…</string>
     <string name="graph">Graph</string>
     <string name="title_activity_graph">Mon</string>
+    <string name="title_activity_graph_nav">Mon Graphs</string>
 </resources>
