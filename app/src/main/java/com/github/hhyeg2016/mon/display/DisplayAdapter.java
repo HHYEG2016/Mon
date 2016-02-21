@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.hhyeg2016.mon.R;
+import com.github.hhyeg2016.mon.data.AppData;
 import com.github.hhyeg2016.mon.data.Data;
 import com.github.hhyeg2016.mon.data.PhoneData;
 import com.github.hhyeg2016.mon.data.TextData;
@@ -78,6 +79,13 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHold
             info1.setText(textData.getState());
             time.setText((new Date(textData.getLogTime())).toString());
             info2.setText(textData.getSubState()+"  "+textData.getAddress());
+        } else if (rawData.getType().equals((AppData.APP))) {
+            AppData appData = (AppData) rawData;
+            imageView.setImageDrawable(context.getDrawable(R.drawable.ic_action_name3));
+            title.setText(AppData.APP);
+            info1.setText(appData.getAppName());
+            time.setText((new Date(appData.getLogTime())).toString());
+            info2.setText(appData.getEventType());
         }
 
     }
