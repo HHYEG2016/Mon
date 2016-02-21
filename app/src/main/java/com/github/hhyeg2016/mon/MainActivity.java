@@ -79,18 +79,14 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{
                             Manifest.permission.READ_CALL_LOG,
-                            Manifest.permission.PACKAGE_USAGE_STATS,
-                            Manifest.permission.READ_SMS
+                            Manifest.permission.READ_SMS,
+                            Manifest.permission.PACKAGE_USAGE_STATS
                     }, 0);
         }
-
 
         // phone stuff
         ArrayList<PhoneData> phlist = PhoneLogger.getPhoneLogs(getApplicationContext());
         ArrayList<TextData> tdlist = TextLogger.getTextLogs(getApplicationContext());
-        for (TextData td : tdlist) {
-            Log.i("TEXT_PING", td.getAddress() + ", " + td.getState() + ", " + td.getSubState() + ", " + td.getLogTime());
-        }
 
         ArrayList<Data> masterList = new ArrayList<>();
         masterList.addAll(phlist);

@@ -58,20 +58,20 @@ public class TextLogger {
                         date_val = c.getLong(date_idx);
                     }
 
-                    String state_val = "unknown";
+                    String state_val = "Unknown";
                     if (read_idx != -1) {
                         if (c.getInt(read_idx) == 1) {
-                            state_val = "read";
+                            state_val = "Read";
                         } else if (c.getInt(read_idx) == 0) {
-                            state_val = "unread";
+                            state_val = "Unread";
                         }
                     }
 
-                    String addr_val = "unknown";
+                    String addr_val = "Unknown";
                     if (addr_idx != -1) {
                         addr_val = c.getString(addr_idx);
                     }
-                    TextData td = new TextData(date_val, "incomming", state_val, addr_val);
+                    TextData td = new TextData(date_val, "Incoming", state_val, addr_val);
                     tdList.add(td);
                 }
                 c.close();

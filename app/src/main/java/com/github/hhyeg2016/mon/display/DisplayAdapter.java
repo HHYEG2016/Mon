@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import com.github.hhyeg2016.mon.R;
 import com.github.hhyeg2016.mon.data.Data;
+import com.github.hhyeg2016.mon.data.PhoneData;
+import com.github.hhyeg2016.mon.data.TextData;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHolder> {
     private ArrayList<Data> mDataset;
@@ -32,7 +35,7 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHold
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public DisplayAdapter(ArrayList<Data> myDataset, Context context) {
-        mDataset = myDataset;
+        this.mDataset = myDataset;
         this.context = context;
     }
 
@@ -59,11 +62,23 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.ViewHold
         TextView time = (TextView) holder.relativeLayout.getChildAt(3);
         TextView info2 = (TextView) holder.relativeLayout.getChildAt(4);
 
-        imageView.setImageDrawable(context.getDrawable(R.drawable.ic_action_name));
-        title.setText("Hi");
-        info1.setText("Hi");
-        time.setText("Hi");
-        info2.setText("Hi");
+        Data rawData = this.mDataset.get(position);
+
+        if (rawData.getType().equals(PhoneData.PHONE)) {
+            PhoneData phoneData = (PhoneData) rawData;
+            imageView.setImageDrawable(context.getDrawable(R.drawable.ic_action_name));
+            title.setText(PhoneData.PHONE);
+            info1.setText(phoneData.getCallType());
+            time.setText((new Date(phoneData.getLogTime())).toString());
+            info2.setText("Duration:  "+phoneData.getCallDuration()+"  "+phoneData.getPhoneNumber());
+        } else if (rawData.getType().equals(TextData.TEXT)) {
+            TextData textData = (TextData) rawData;
+            imageView.setImageDrawable(context.getDrawable(R.drawable.ic_action_name2));
+            title.setText(TextData.TEXT);
+            info1.setText(textData.getState());
+            time.setText((new Date(textData.getLogTime())).toString());
+            info2.setText(textData.getSubState()+"  "+textData.getAddress());
+        }
 
     }
 

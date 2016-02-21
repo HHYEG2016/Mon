@@ -4,9 +4,10 @@ public class TextData extends Data {
     private String state;
     private String subState;
     private String address;
+    public static final String TEXT = "Text";
 
     public TextData(Long logTime, String state, String subState, String address) {
-        this.setType("TextData");
+        this.setType(TextData.TEXT);
         this.setLogTime(logTime);
         this.setState(state);
         this.setSubState(subState);

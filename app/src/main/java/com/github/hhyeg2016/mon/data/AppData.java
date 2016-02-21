@@ -12,7 +12,6 @@ public class AppData extends Data {
         this.setEventType(eventType);
     }
 
-
     public String getEventType() {
         return eventType;
     }
