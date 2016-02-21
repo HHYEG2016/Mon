@@ -217,12 +217,14 @@ public class ChartAppDataActivity extends AppCompatActivity {
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
 
         HashMap<String, Integer> hmap = new HashMap<>();
+        /*
         for (AppData mDataVal : mData) {
             if (mDataVal.getAppName().equals(name)) {
                 Calendar cl = Calendar.getInstance();
                 cl.setTimeInMillis(mDataVal.getLogTime());
-                String compVal = "" + cl.get(Calendar.DAY_OF_MONTH) + " " + cl.get(Calendar.MONTH) + " " + cl.get(Calendar.YEAR);
-                if(compVal.equals(date)) {
+                String compVal = "" + cl.get(Calendar.DAY_OF_MONTH) + " "
+                        + cl.get(Calendar.MONTH) + " " + cl.get(Calendar.YEAR);
+                if (compVal.equals(date)) {
 
                     String dval = "" + cl.get(Calendar.HOUR_OF_DAY);
                     if (hmap.get(dval) == null) {
@@ -235,18 +237,23 @@ public class ChartAppDataActivity extends AppCompatActivity {
                 }
             }
         }
+        */
+        // TODO: REMOVE THIS NICE DATA FAKIFIER
+        for (int i = 0; i < numHours; i++) {
+            hmap.put(String.valueOf(i), (int) (Math.random() * 11));
+        }
 
         for (Map.Entry<String, Integer> entry : hmap.entrySet()) {
             String key = entry.getKey();
             Integer value = entry.getValue();
-            yVals1.add(new BarEntry(Integer.valueOf(key), value));
+            yVals1.add(new BarEntry(value, Integer.valueOf(key)));
         }
 
 
         // create a dataset and give it a type
-        BarDataSet phSet = new BarDataSet(yVals1, "testVal");
+        BarDataSet phSet = new BarDataSet(yVals1, names[appNameSelectorIndex]);
         phSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-        phSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        phSet.setColor(ColorTemplate.getHoloBlue());
 
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
         dataSets.add(phSet);
