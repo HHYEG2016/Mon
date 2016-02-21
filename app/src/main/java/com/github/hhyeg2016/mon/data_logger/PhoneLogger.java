@@ -1,4 +1,4 @@
-package com.github.hhyeg2016.mon.phone;
+package com.github.hhyeg2016.mon.data_logger;
 
 import android.Manifest;
 import android.content.Context;
