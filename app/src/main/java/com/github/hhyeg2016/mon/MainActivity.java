@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.github.hhyeg2016.mon.data.Data;
+import com.github.hhyeg2016.mon.data.DataComparator;
 import com.github.hhyeg2016.mon.data.PhoneData;
 import com.github.hhyeg2016.mon.data.TextData;
 import com.github.hhyeg2016.mon.data_logger.TextLogger;
@@ -32,6 +33,7 @@ import com.github.hhyeg2016.mon.monitor.MonitorServiceThread;
 import com.github.hhyeg2016.mon.data_logger.PhoneLogger;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -91,6 +93,13 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Data> masterList = new ArrayList<>();
         masterList.addAll(phlist);
         masterList.addAll(tdlist);
+
+        Collections.sort(masterList, new DataComparator() {
+            @Override
+            public int compare(Data o1, Data o2) {
+                return super.compare(o1, o2);
+            }
+        });
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
